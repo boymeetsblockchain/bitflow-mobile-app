@@ -1,9 +1,9 @@
-import { View, Text } from 'react-native'
-import { TextWrapper } from '../components/textWrapper'
+import { View } from 'react-native'
+import OnboardingScreen from './onboarding'
 export default function OnboardingPage() {
   return (
     <View>
-      <TextWrapper>OnboardingPage</TextWrapper>
+     <OnboardingScreen />
     </View>
   )
 }
