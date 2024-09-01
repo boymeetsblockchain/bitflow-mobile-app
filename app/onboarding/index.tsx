@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, Image, View, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function OnboardingScreen() {
   // Create an animated value
   const zoomValue = useRef(new Animated.Value(1)).current;
+  const router = useRouter();
 
   useEffect(() => {
     // Define the zoom-in and zoom-out animation
@@ -29,19 +31,29 @@ export default function OnboardingScreen() {
     return () => zoomInOut.stop();
   }, [zoomValue]);
 
+  useEffect(() => {
+    // Automatically navigate to "cryptoTradingPlatform" after 3 seconds
+    const timer = setTimeout(() => {
+      router.push('/splashScreen');
+    }, 3000);
+
+    // Cleanup timer if component unmounts
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
     <View style={styles.container}>
       <View style={styles.overlay}>
         <Animated.Image
           style={[styles.logo, { transform: [{ scale: zoomValue }] }]} // Apply animation to scale
           resizeMode='contain'
-          source={require("../../assets/images/logo.png")}
+          source={require('../../assets/images/logo.png')}
         />
       </View>
       <Image
         style={styles.backgroundImage}
         resizeMode='contain'
-        source={require("../../assets/images/splash-screen.png")}
+        source={require('../../assets/images/splash-screen.png')}
       />
     </View>
   );
@@ -57,7 +69,6 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width: '100%',
     height: '100%',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
