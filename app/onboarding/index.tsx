@@ -34,7 +34,7 @@ export default function OnboardingScreen() {
   useEffect(() => {
     // Automatically navigate to "cryptoTradingPlatform" after 3 seconds
     const timer = setTimeout(() => {
-      router.push('/splashScreen');
+      router.push('/onboarding/splashScreen');
     }, 3000);
 
     // Cleanup timer if component unmounts
