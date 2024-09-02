@@ -14,9 +14,9 @@ export default function RegisterPage() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={tw`flex-1 bg-[#01041F] px-2`}>
-      <ScrollView contentContainerStyle={tw`flex-1`}>
-        <View style={tw`pt-32`}>
+    <SafeAreaView style={tw`flex-1 bg-[#01041F] px-2 pt-16`}>
+      <ScrollView contentContainerStyle={tw``}>
+        <View style={tw``}>
           <Text style={tw`text-white text-2xl font-bold max-w-[140px]`}>
             Sign up new account
           </Text>
