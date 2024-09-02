@@ -1,30 +1,30 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Image, View, StyleSheet } from 'react-native';
+import { Animated, View, StyleSheet, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
 
-export default function OnboardingScreen() {
-  // Create an animated value
+const OnboardingScreen: React.FC = () => {
+  // Create an animated value for zoom effect
   const zoomValue = useRef(new Animated.Value(1)).current;
   const router = useRouter();
 
   useEffect(() => {
-    // Define the zoom-in and zoom-out animation
+    // Define the zoom-in and zoom-out animation sequence
     const zoomInOut = Animated.loop(
       Animated.sequence([
         Animated.timing(zoomValue, {
           toValue: 1.2, // Zoom in to 120% size
           duration: 1000, // Duration for zooming in
-          useNativeDriver: true,
+          useNativeDriver: true, // Use native driver for better performance
         }),
         Animated.timing(zoomValue, {
           toValue: 1, // Zoom out to original size
           duration: 1000, // Duration for zooming out
-          useNativeDriver: true,
+          useNativeDriver: true, // Use native driver for better performance
         }),
       ])
     );
 
-    // Start the animation
+    // Start the zoom animation
     zoomInOut.start();
 
     // Cleanup the animation when the component unmounts
@@ -32,7 +32,7 @@ export default function OnboardingScreen() {
   }, [zoomValue]);
 
   useEffect(() => {
-    // Automatically navigate to "cryptoTradingPlatform" after 3 seconds
+    // Automatically navigate to "splashScreen" after 3 seconds
     const timer = setTimeout(() => {
       router.push('/onboarding/splashScreen');
     }, 3000);
@@ -42,42 +42,42 @@ export default function OnboardingScreen() {
   }, [router]);
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../../assets/images/splash-screen.png')}
+      style={styles.container}
+    >
       <View style={styles.overlay}>
         <Animated.Image
-          style={[styles.logo, { transform: [{ scale: zoomValue }] }]} // Apply animation to scale
+          style={[styles.logo, { transform: [{ scale: zoomValue }] }]} // Apply zoom animation
           resizeMode='contain'
           source={require('../../assets/images/logo.png')}
         />
       </View>
-      <Image
-        style={styles.backgroundImage}
-        resizeMode='contain'
-        source={require('../../assets/images/splash-screen.png')}
-      />
-    </View>
+    </ImageBackground>
   );
-}
+};
 
+// Styles for the component
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: "100%",
   },
   overlay: {
     position: 'absolute',
     top: 0,
-    zIndex: 100,
-    width: '100%',
-    height: '100%',
+    left: 0,
+    right: 0,
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 100,
   },
   logo: {
     width: 150,
     height: 150,
   },
-  backgroundImage: {
-    width: '100%',
-    height: '100%',
-  },
 });
+
+export default OnboardingScreen;
