@@ -78,11 +78,11 @@ const ForgotPasswordPage: React.FC = () => {
             {/* Agreement checkbox */}
             <View style={tw`flex-row items-center gap-4`}>
               <TouchableOpacity onPress={handleCheckboxToggle}>
-                <View style={tw`border rounded p-1`}>
-                  <View style={tw`w-4 h-4 ${checked ? 'bg-[#E5770E]' : 'bg-white'}`} />
+                <View style={tw`border p-1 rounded-full`}>
+                  <View style={tw`w-4 h-4 rounded-full ${checked ? 'bg-[#E5770E]' : 'bg-white'}`} />
                 </View>
               </TouchableOpacity>
-              <Text style={tw`py-4 text-black w-[88%]`}>
+              <Text style={tw`py-4 text-black w-[85%]`}>
                 I agree that in line with the Federal government Anti-Money Laundering Law, all my activities here will be within the confines of the law.
               </Text>
             </View>
