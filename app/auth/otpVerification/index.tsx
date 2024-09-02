@@ -29,7 +29,7 @@ export default function OTPVerificationScreen() {
         </View>
 
         <View style={tw`py-4`}>
-          <Button title='Continue' onPress={() => router.push("/auth/otpVerification")} />
+          <Button title='Continue' onPress={() => router.push("/auth/otpVerification/otpCodeVerification")} />
         </View>
 
       

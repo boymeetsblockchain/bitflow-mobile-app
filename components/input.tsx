@@ -82,7 +82,6 @@ export const SelectInputComp: React.FC<SelectInputCompProps> = ({
       <SelectDropdown
         data={data}
         onSelect={(selectedItem, index) => {
-          console.log(selectedItem, index);
         }}
         renderButton={(selectedItem, isOpened) => (
           <View style={[tw`bg-white h-11.5 rounded-xl px-4 flex-row items-center justify-between`, inputClass ? tw`${inputClass}` : {}]}>
