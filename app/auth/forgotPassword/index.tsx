@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 import tw from 'twrnc';
 import { Button, InputComp } from '../../../components';
@@ -12,15 +12,10 @@ export default function ForgotPasswordPage() {
   // Router hook for navigation
   const router = useRouter();
 
-  // Effect to navigate to the verification page when in two-factor mode
-  useEffect(() => {
-    if (isTwoFactor) {
-      router.push("/auth/forgotPassword/verifyIdentity");
-    }
-  }, [isTwoFactor, router]);
 
   // Determine the text and input placeholder based on the two-factor state
-  const title = isTwoFactor ? 'Two-factor authentication' : 'Forgot Password';
+  const title = isTwoFactor ? 'Two-factor ' : 'Forgot';
+  const subTitle = isTwoFactor ? 'authentication ' : 'Password';
   const description = isTwoFactor
     ? 'Kindly verify via email. Input authentication code promptly for secure access.'
     : 'Enter your email address associated with your account to reset your password. You will receive an email with a confirmation code.';
@@ -35,7 +30,7 @@ export default function ForgotPasswordPage() {
           <View style={tw`min-h-1/2 rounded-3xl bg-white w-full flex-col justify-center items-start px-4 py-6`}>
             {/* Title */}
             <Text style={tw`text-2xl font-medium text-black`}>
-              {title}
+              {title} <Text style={tw`text-[#E6780C]`}>{subTitle}</Text>
             </Text>
             {/* Description */}
             <Text style={tw`py-4 text-black`}>
@@ -53,7 +48,11 @@ export default function ForgotPasswordPage() {
 
         {/* Continue Button */}
         <View style={tw`py-4`}>
-          <Button title='Continue' onPress={() => setIsTwoFactor(true)} />
+          <Button title='Continue' onPress={() => {setIsTwoFactor(true)
+                if (isTwoFactor) {
+                    router.push("/auth/identityVerification");
+                    }
+          }} />
         </View>
       </ScrollView>
     </SafeAreaView>

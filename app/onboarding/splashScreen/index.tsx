@@ -36,7 +36,7 @@ export default function SplashPage() {
         source={require('../../../assets/images/splash-screen.png')}
       >
         {/* Skip text button */}
-        <Text style={styles.skipText}>Skip</Text>
+        <Text onPress={() => router.push("/auth/register")} style={styles.skipText}>Skip</Text>
 
         {/* Carousel component for displaying slides */}
         <Carousel

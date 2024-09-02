@@ -17,6 +17,7 @@ interface InputCompProps {
 // Define the props type for the SelectInputComp component
 interface SelectInputCompProps extends InputCompProps {
   data: { icon?: string; title: string }[]; // Data structure for dropdown items
+  labelClass?: string;
 }
 
 // InputComp functional component
@@ -30,7 +31,7 @@ export const InputComp: React.FC<InputCompProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {label && <Text style={tw`text-white py-2.5 capitalize ${labelClass}`}>{label}</Text>}
+      {label && <Text style={tw`text-white py-2.5 capitalize ${labelClass ?? ""}`}>{label}</Text>}
       <TextInput
         style={[tw`bg-white h-11.5 rounded-xl px-4`, inputClass ? tw`${inputClass}` : {}]} // Handle conditional styling
         placeholder={placeholder}
@@ -77,10 +78,11 @@ export const SelectInputComp: React.FC<SelectInputCompProps> = ({
   placeholder,
   data,
   inputClass = "",
+  labelClass,
 }) => {
   return (
     <View style={styles.container}>
-      {label && <Text style={tw`text-white py-2.5 capitalize`}>{label}</Text>}
+      {label && <Text style={tw`text-white py-2.5 capitalize ${labelClass ?? ""}`}>{label}</Text>}
       <SelectDropdown
         data={data}
         onSelect={(selectedItem, index) => {
