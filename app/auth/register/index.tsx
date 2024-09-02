@@ -31,7 +31,7 @@ export default function RegisterPage() {
         </View>
 
         <View style={tw`py-4`}>
-          <Button title='Continue' onPress={() => router.push("/auth/register")} />
+          <Button title='Continue' onPress={() => router.push("/auth/otpVerification")} />
         </View>
 
         <View style={tw`mb-8`}>
