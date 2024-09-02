@@ -24,7 +24,7 @@ export default function OTPVerificationScreen() {
           <Text style={tw`text-white text-center pt-8 pb-4`}>we will send you a one time mobile password to this number</Text>
         
         <View style={tw`flex-col gap-1 pt-5`}>
-          <SelectInputComp label='Gender' placeholder='Select Country' data={country} />
+          <SelectInputComp label='Country' placeholder='Select Country' data={country} />
           <InputComp keyboardType='numeric' label='Enter Phone Number' placeholder='080398357286' />
         </View>
 
