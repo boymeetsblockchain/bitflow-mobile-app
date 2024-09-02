@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, StyleSheet, KeyboardTypeOptions } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import tw from 'twrnc';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,6 +9,7 @@ interface InputCompProps {
   label?: string;
   placeholder?: string;
   placeholderTextColor?: string;
+  keyboardType?: KeyboardTypeOptions; // Correct type for keyboardType
   inputClass?: string;
 }
 
@@ -22,6 +23,7 @@ export const InputComp: React.FC<InputCompProps> = ({
   label,
   placeholder,
   placeholderTextColor = "#C6C6C6",
+  keyboardType, // Optional, default is undefined
   inputClass = "", // Default to an empty string if not provided
 }) => {
   return (
@@ -31,13 +33,14 @@ export const InputComp: React.FC<InputCompProps> = ({
         style={[tw`bg-white h-11.5 rounded-xl px-4`, inputClass ? tw`${inputClass}` : {}]} // Handle conditional styling
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
+        keyboardType={keyboardType} // Properly typed
       />
     </View>
   );
 };
 
 // PasswordInputComp functional component with password visibility toggle
-export const PasswordInputComp: React.FC<InputCompProps> = ({
+export const PasswordInputComp: React.FC<Omit<InputCompProps, 'keyboardType'>> = ({
   label,
   placeholder,
   placeholderTextColor = "#C6C6C6",
