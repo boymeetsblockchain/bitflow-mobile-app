@@ -4,9 +4,11 @@ import Carousel from 'react-native-reanimated-carousel';
 import 'react-native-reanimated';
 import Button from '../../../components/button';
 import tw from 'twrnc';
+import { useRouter } from 'expo-router';
 
 export default function SplashPage() {
   // Get the width of the device window
+  const router = useRouter();
   const { width } = Dimensions.get('window');
 
   // Data for the carousel
@@ -65,7 +67,7 @@ export default function SplashPage() {
 
         {/* Footer section with button and information */}
         <View style={styles.footer}>
-          <Button title='Next' />
+          <Button title='Next' onPress={() => router.push("/auth/register")} />
           <View style={tw`flex-row justify-center items-center pt-4`}>
             {/* Lock image */}
             <Image

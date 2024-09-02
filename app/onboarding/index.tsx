@@ -60,9 +60,9 @@ const OnboardingScreen: React.FC = () => {
 // Styles for the component
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Use flex for full height and width
     justifyContent: 'center',
     alignItems: 'center',
+    height: "100%",
   },
   overlay: {
     position: 'absolute',
