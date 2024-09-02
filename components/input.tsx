@@ -11,6 +11,7 @@ interface InputCompProps {
   placeholderTextColor?: string;
   keyboardType?: KeyboardTypeOptions; // Correct type for keyboardType
   inputClass?: string;
+  labelClass?: string;
 }
 
 // Define the props type for the SelectInputComp component
@@ -25,10 +26,11 @@ export const InputComp: React.FC<InputCompProps> = ({
   placeholderTextColor = "#C6C6C6",
   keyboardType, // Optional, default is undefined
   inputClass = "", // Default to an empty string if not provided
+  labelClass,
 }) => {
   return (
     <View style={styles.container}>
-      {label && <Text style={tw`text-white py-2.5 capitalize`}>{label}</Text>}
+      {label && <Text style={tw`text-white py-2.5 capitalize ${labelClass}`}>{label}</Text>}
       <TextInput
         style={[tw`bg-white h-11.5 rounded-xl px-4`, inputClass ? tw`${inputClass}` : {}]} // Handle conditional styling
         placeholder={placeholder}
@@ -82,6 +84,7 @@ export const SelectInputComp: React.FC<SelectInputCompProps> = ({
       <SelectDropdown
         data={data}
         onSelect={(selectedItem, index) => {
+          console.log(selectedItem, index);
         }}
         renderButton={(selectedItem, isOpened) => (
           <View style={[tw`bg-white h-11.5 rounded-xl px-4 flex-row items-center justify-between`, inputClass ? tw`${inputClass}` : {}]}>

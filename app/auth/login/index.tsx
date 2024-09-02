@@ -24,7 +24,9 @@ export default function LoginPage() {
         <View style={tw`flex-col gap-1 pt-5`}>
           <InputComp label='Account' placeholder='Enter phone number or email' />
           <PasswordInputComp label='Password' placeholder='Enter Password' />
+          <TouchableOpacity onPress={() => router.push("/auth/forgotPassword")}>
           <Text style={tw`text-[#E5770E] text-right pt-2`}>Forgot Password?</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Continue Button */}
