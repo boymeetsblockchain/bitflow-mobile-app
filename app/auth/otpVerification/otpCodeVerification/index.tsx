@@ -18,7 +18,7 @@ export default function OTPCodeVerificationScreen() {
   // Handler for verifying OTP
   const handleVerify = () => {
     // You might want to add OTP verification logic here
-    router.push('/auth/login');
+    router.push('/homepage/');
   };
 
   // Handler for resending OTP

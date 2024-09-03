@@ -6,7 +6,7 @@ interface SafeViewComponentProps{
 }
 export const SafeViewComponent=({children}:SafeViewComponentProps)=>{
     return(
-        <SafeAreaView style={tw `flex-1 p-6`}>
+        <SafeAreaView style={tw `flex-1 p-6 bg-[#01041F]`}>
             {children}
         </SafeAreaView>
     )

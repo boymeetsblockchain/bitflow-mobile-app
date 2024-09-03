@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  TextInput, View, TouchableOpacity, StyleSheet, KeyboardTypeOptions } from 'react-native';
+import { TextInput, View, TouchableOpacity, StyleSheet, KeyboardTypeOptions } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import tw from 'twrnc';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,15 +10,16 @@ interface InputCompProps {
   label?: string;
   placeholder?: string;
   placeholderTextColor?: string;
-  keyboardType?: KeyboardTypeOptions; // Correct type for keyboardType
+  keyboardType?: KeyboardTypeOptions;
   inputClass?: string;
   labelClass?: string;
+  value: string;
+  onChange: (text: string) => void; // onChange function prop
 }
 
 // Define the props type for the SelectInputComp component
 interface SelectInputCompProps extends InputCompProps {
-  data: { icon?: string; title: string }[]; // Data structure for dropdown items
-  labelClass?: string;
+  data: { icon?: string; title: string }[]; 
 }
 
 // InputComp functional component
@@ -26,9 +27,11 @@ export const InputComp: React.FC<InputCompProps> = ({
   label,
   placeholder,
   placeholderTextColor = "#C6C6C6",
-  keyboardType, // Optional, default is undefined
-  inputClass = "", // Default to an empty string if not provided
+  keyboardType,
+  inputClass = "",
   labelClass,
+  value,
+  onChange, // Handle the onChange prop
 }) => {
   return (
     <View style={styles.container}>
@@ -37,7 +40,9 @@ export const InputComp: React.FC<InputCompProps> = ({
         style={[tw`bg-white h-11.5 rounded-xl px-4`, inputClass ? tw`${inputClass}` : {}]} // Handle conditional styling
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
-        keyboardType={keyboardType} // Properly typed
+        keyboardType={keyboardType}
+        value={value}
+        onChangeText={onChange} // Use onChangeText instead of onChange for TextInput
       />
     </View>
   );
@@ -49,8 +54,10 @@ export const PasswordInputComp: React.FC<Omit<InputCompProps, 'keyboardType'>> =
   placeholder,
   placeholderTextColor = "#C6C6C6",
   inputClass = "",
+  value,
+  onChange,
 }) => {
-  const [showPass, setShowPass] = useState(false); // State to toggle password visibility
+  const [showPass, setShowPass] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -60,11 +67,13 @@ export const PasswordInputComp: React.FC<Omit<InputCompProps, 'keyboardType'>> =
           style={[tw`bg-white h-11.5 rounded-xl px-4`, inputClass ? tw`${inputClass}` : {}]}
           placeholder={placeholder}
           placeholderTextColor={placeholderTextColor}
-          secureTextEntry={!showPass} // Toggle password visibility
+          secureTextEntry={!showPass}
+          value={value}
+          onChangeText={onChange} // Handle the onChange prop
         />
         <TouchableOpacity
           style={styles.eyeIcon}
-          onPress={() => setShowPass(!showPass)} // Toggle password visibility
+          onPress={() => setShowPass(!showPass)}
         >
           <TextWrapper style={tw`text-gray-500`}>{showPass ? 'Hide' : 'Show'}</TextWrapper>
         </TouchableOpacity>
@@ -77,18 +86,23 @@ export const PasswordInputComp: React.FC<Omit<InputCompProps, 'keyboardType'>> =
 export const SelectInputComp: React.FC<SelectInputCompProps> = ({
   label,
   placeholder,
+  value,
   data,
   inputClass = "",
   labelClass,
+  onChange,
 }) => {
   return (
     <View style={styles.container}>
-      {label && <TextWrapper style={tw`text-white  text-base py-2.5 capitalize ${labelClass ?? ""}`}>{label}</TextWrapper>}
-      <SelectDropdown
+      {label && <TextWrapper style={tw`text-white text-base py-2.5 capitalize ${labelClass ?? ""}`}>{label}</TextWrapper>}
+      <SelectDropdown 
+
+      defaultValue={data[0]}
         data={data}
         onSelect={(selectedItem, index) => {
-          console.log(selectedItem, index);
+          onChange(selectedItem.title); 
         }}
+      
         renderButton={(selectedItem, isOpened) => (
           <View style={[tw`bg-white h-11.5 rounded-xl px-4 flex-row items-center justify-between`, inputClass ? tw`${inputClass}` : {}]}>
             {selectedItem && (

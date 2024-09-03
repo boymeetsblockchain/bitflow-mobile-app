@@ -1,39 +1,118 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { TextWrapper } from '../../../components';
 import tw from 'twrnc';
 import { Button, InputComp, PasswordInputComp, SelectInputComp } from '../../../components';
 import { useRouter } from 'expo-router';
-import { SafeViewComponent } from '../../../components/safeViewComponent';
+import axios from 'axios';
 
-// Sample data for gender selection
-const gender = [
-  { title: 'man' },
-  { title: 'woman' },
+const genderOptions = [
+  { title: 'Select Gender', value: '' },
+  { title: 'man', value: 'man' },
+  { title: 'woman', value: 'woman' },
 ];
 
 export default function RegisterPage() {
   const router = useRouter();
+
+  // State for the form fields
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [gender, setGender] = useState('');
+
+  const handleSubmit = async () => {
+    console.log('Submitted Data:', fullName, email, password, confirmPassword, gender);
+
+    // Validation checks
+    if (!fullName || !email || !password || !confirmPassword || !gender) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+  
+      const jsonData = JSON.stringify({
+        fullName,
+        email,
+        password,
+        gender,
+      });
+
+  
+      const response = await axios.post('https://bitflow-backend-server.vercel.app/api/auth/register', jsonData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log(response);
+      if (response.data.success) {
+        router.push("/auth/otpVerification");
+      } else {
+        alert(response.data.message || "Registration failed");
+      }
+    } catch (error: any) {
+      console.error(error.message);
+      alert("An error occurred during registration. Please try again.");
+    }
+  };
 
   return (
     <SafeAreaView style={tw`flex-1 bg-[#01041F] px-2 pt-16`}>
       <ScrollView contentContainerStyle={tw``}>
         <View style={tw``}>
           <TextWrapper style={tw`text-white text-2xl text-center`} fontWeight='bold'>
-            Sign up for a  new account
+            Sign up for a new account
           </TextWrapper>
         </View>
         
         <View style={tw`flex-col gap-1 pt-5`}>
-          <InputComp label='Full name' placeholder='Example: Yann' />
-          <InputComp label='Email' placeholder='Example@gmail.com' />
-          <PasswordInputComp label='Password' placeholder='Enter Password' />
-          <PasswordInputComp label='Confirm Password' placeholder='Enter Password' />
-          <SelectInputComp label='Gender' placeholder='Select Gender' data={gender} />
+          <InputComp
+            label='Full name'
+            placeholder='Example: Yann'
+            value={fullName}
+            onChange={setFullName}
+          />
+          <InputComp
+            label='Email'
+            placeholder='Example@gmail.com'
+            value={email}
+            onChange={setEmail}
+            keyboardType="email-address"
+          />
+          <PasswordInputComp
+            label='Password'
+            placeholder='Enter Password'
+            value={password}
+            onChange={setPassword}
+          />
+          <PasswordInputComp
+            label='Confirm Password'
+            placeholder='Enter Password'
+            value={confirmPassword}
+            onChange={setConfirmPassword}
+          />
+          <SelectInputComp
+            label='Gender'
+            placeholder='Select Gender'
+            data={genderOptions}
+            value={gender}
+            onChange={(value) => {
+              console.log('Selected Gender:', value);
+              setGender(value);
+            }}
+          />
         </View>
 
         <View style={tw`py-4`}>
-          <Button title='Continue' onPress={() => router.push("/auth/otpVerification")} />
+          <Button title='Continue' onPress={handleSubmit} />
         </View>
 
         <View style={tw`mb-8`}>
@@ -64,5 +143,4 @@ export default function RegisterPage() {
       </ScrollView>
     </SafeAreaView>
   );
-};
-
+}
