@@ -5,6 +5,7 @@ import 'react-native-reanimated';
 import Button from '../../../components/button';
 import tw from 'twrnc';
 import { useRouter } from 'expo-router';
+import { TextWrapper } from '../../../components';
 
 export default function SplashPage() {
   // Get the width of the device window
@@ -36,7 +37,7 @@ export default function SplashPage() {
         source={require('../../../assets/images/splash-screen.png')}
       >
         {/* Skip text button */}
-        <Text onPress={() => router.push("/auth/register")} style={styles.skipText}>Skip</Text>
+        <TextWrapper onPress={() => router.push("/auth/register")} style={styles.skipText}>Skip</TextWrapper>
 
         {/* Carousel component for displaying slides */}
         <Carousel
@@ -58,8 +59,8 @@ export default function SplashPage() {
               />
               {/* Text container for carousel item */}
               <View style={styles.textContainer}>
-                <Text style={styles.titleText}>{item.title}</Text>
-                <Text style={styles.descriptionText}>{item.text}</Text>
+                <TextWrapper style={styles.titleText}>{item.title}</TextWrapper>
+                <TextWrapper style={styles.descriptionText}>{item.text}</TextWrapper>
               </View>
             </View>
           )}
@@ -76,7 +77,7 @@ export default function SplashPage() {
               source={require('../../../assets/images/lock.png')}
             />
             {/* Footer text */}
-            <Text style={styles.footerText}>Your information is always secure</Text>
+            <TextWrapper style={styles.footerText}>Your information is always secure</TextWrapper>
           </View>
         </View>
       </ImageBackground>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView } from 'react-native';
+import { View,  SafeAreaView, ScrollView } from 'react-native';
+import { TextWrapper } from '../../../components';
 import tw from 'twrnc';
 import { Button, InputComp } from '../../../components';
 import { useRouter } from 'expo-router';
@@ -24,18 +25,18 @@ export default function ForgotPasswordPage() {
 
   return (
     <SafeAreaView style={tw`flex-1 bg-[#01041F] px-2 pt-40`}>
-      <ScrollView contentContainerStyle={tw`flex-grow`}>
+      <View style={tw`flex-grow`}>
         <View style={tw`pb-20`}>
           {/* Form container */}
           <View style={tw`min-h-1/2 rounded-3xl bg-white w-full flex-col justify-center items-start px-4 py-6`}>
             {/* Title */}
-            <Text style={tw`text-2xl font-medium text-black`}>
-              {title} <Text style={tw`text-[#E6780C]`}>{subTitle}</Text>
-            </Text>
+            <TextWrapper style={tw`text-2xl font-medium text-black`}>
+              {title} <TextWrapper style={tw`text-[#E6780C]`}>{subTitle}</TextWrapper>
+            </TextWrapper>
             {/* Description */}
-            <Text style={tw`py-4 text-black`}>
+            <TextWrapper style={tw`py-4 text-black`}>
               {description}
-            </Text>
+            </TextWrapper>
             {/* Input component for email or authentication code */}
             <InputComp
               inputClass='border min-w-full'
@@ -54,7 +55,7 @@ export default function ForgotPasswordPage() {
                     }
           }} />
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

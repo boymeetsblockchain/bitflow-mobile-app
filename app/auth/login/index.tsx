@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View,  SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
 import tw from 'twrnc';
 import { Button, InputComp, PasswordInputComp } from '../../../components';
 import { useRouter } from 'expo-router';
+import { TextWrapper } from '../../../components';
+import { SafeViewComponent } from '../../../components/safeViewComponent';
 
 // LoginPage component for user authentication
 export default function LoginPage() {
@@ -14,10 +16,10 @@ export default function LoginPage() {
       <ScrollView contentContainerStyle={tw`flex-grow`}>
         {/* Header Section */}
         <View style={tw`mb-4`}>
-          <Text style={tw`text-white text-2xl font-bold`}>
+          <TextWrapper style={tw`text-white text-2xl text-center`} fontWeight='bold'>
             Welcome back!
-          </Text>
-          <Text style={tw`text-white pt-4`}>Login to continue</Text>
+          </TextWrapper>
+          <TextWrapper style={tw`text-white pt-4`}>Login to continue</TextWrapper>
         </View>
         
         {/* Login Form */}
@@ -25,7 +27,7 @@ export default function LoginPage() {
           <InputComp label='Account' placeholder='Enter phone number or email' />
           <PasswordInputComp label='Password' placeholder='Enter Password' />
           <TouchableOpacity onPress={() => router.push("/auth/forgotPassword")}>
-          <Text style={tw`text-[#E5770E] text-right pt-2`}>Forgot Password?</Text>
+          <TextWrapper style={tw`text-[#E5770E] text-right pt-2`}>Forgot Password?</TextWrapper>
           </TouchableOpacity>
         </View>
 
@@ -36,7 +38,7 @@ export default function LoginPage() {
 
         {/* Social Login Options */}
         <View style={tw`my-8`}>
-          <Text style={tw`text-center text-white`}>Or sign up with</Text>
+          <TextWrapper style={tw`text-center text-white`}>Or sign up with</TextWrapper>
           <View style={tw`flex-row pt-7 items-center justify-between`}>
             <TouchableOpacity style={tw`w-1/2`}>
               <Image
@@ -56,9 +58,9 @@ export default function LoginPage() {
 
           {/* Registration Prompt */}
           <View style={tw`flex-row justify-center items-center py-4`}>
-            <Text style={tw`text-center text-white`}>Don't have an account?</Text>
+            <TextWrapper style={tw`text-center text-white`}>Don't have an account?</TextWrapper>
             <TouchableOpacity onPress={() => router.push("/auth/register")}>
-              <Text style={tw`text-[#E5770E] mx-2`}>Register now</Text>
+              <TextWrapper style={tw`text-[#E5770E] mx-2`}>Register now</TextWrapper>
             </TouchableOpacity>
           </View>
         </View>

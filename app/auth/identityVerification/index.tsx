@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View,  SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import tw from 'twrnc';
 import { Button, InputComp, SelectInputComp } from '../../../components';
 import { useRouter } from 'expo-router';
+import { TextWrapper } from '../../../components';
 
 // Sample data for document type and country selection
 const docType = [
@@ -47,13 +48,13 @@ const ForgotPasswordPage: React.FC = () => {
           {/* Form container */}
           <View style={tw`min-h-1/2 rounded-3xl bg-white w-full flex-col justify-center items-start px-4 py-6`}>
             {/* Title */}
-            <Text style={tw`text-2xl font-medium text-[#E6780C] self-center`}>
+            <TextWrapper style={tw`text-2xl font-medium text-[#E6780C] self-center`}>
               Verify Your Identity
-            </Text>
+            </TextWrapper>
             {/* Description */}
-            <Text style={tw`py-4 text-black text-center leading-7`}>
+            <TextWrapper style={tw`py-4 text-black text-center leading-7`}>
               Your information is always secure. The only thing missing is KYC verification and Anti-Money Laundering agreements.
-            </Text>
+            </TextWrapper>
             {/* Input components for document type, country, and ID number */}
             <SelectInputComp
               inputClass='border min-w-full'
@@ -82,9 +83,9 @@ const ForgotPasswordPage: React.FC = () => {
                   <View style={tw`w-4 h-4 rounded-full ${checked ? 'bg-[#E5770E]' : 'bg-white'}`} />
                 </View>
               </TouchableOpacity>
-              <Text style={tw`py-4 text-black w-[85%]`}>
+              <TextWrapper style={tw`py-4 text-black w-[85%]`}>
                 I agree that in line with the Federal government Anti-Money Laundering Law, all my activities here will be within the confines of the law.
-              </Text>
+              </TextWrapper>
             </View>
             {/* Action buttons */}
             <View style={tw`py-4 w-full flex-row justify-between gap-4`}>

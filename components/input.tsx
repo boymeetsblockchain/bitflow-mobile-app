@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet, KeyboardTypeOptions } from 'react-native';
+import {  TextInput, View, TouchableOpacity, StyleSheet, KeyboardTypeOptions } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import tw from 'twrnc';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TextWrapper } from './textWrapper';
 
 // Define the props type for the InputComp component
 interface InputCompProps {
@@ -31,7 +32,7 @@ export const InputComp: React.FC<InputCompProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {label && <Text style={tw`text-white py-2.5 capitalize ${labelClass ?? ""}`}>{label}</Text>}
+      {label && <TextWrapper style={tw`text-white py-2.5 text-base capitalize ${labelClass ?? ""}`}>{label}</TextWrapper>}
       <TextInput
         style={[tw`bg-white h-11.5 rounded-xl px-4`, inputClass ? tw`${inputClass}` : {}]} // Handle conditional styling
         placeholder={placeholder}
@@ -53,7 +54,7 @@ export const PasswordInputComp: React.FC<Omit<InputCompProps, 'keyboardType'>> =
 
   return (
     <View style={styles.container}>
-      {label && <Text style={tw`text-white py-2.5 capitalize`}>{label}</Text>}
+      {label && <TextWrapper style={tw`text-white text-base py-2.5 capitalize`}>{label}</TextWrapper>}
       <View style={tw`relative`}>
         <TextInput
           style={[tw`bg-white h-11.5 rounded-xl px-4`, inputClass ? tw`${inputClass}` : {}]}
@@ -65,7 +66,7 @@ export const PasswordInputComp: React.FC<Omit<InputCompProps, 'keyboardType'>> =
           style={styles.eyeIcon}
           onPress={() => setShowPass(!showPass)} // Toggle password visibility
         >
-          <Text style={tw`text-gray-500`}>{showPass ? 'Hide' : 'Show'}</Text>
+          <TextWrapper style={tw`text-gray-500`}>{showPass ? 'Hide' : 'Show'}</TextWrapper>
         </TouchableOpacity>
       </View>
     </View>
@@ -82,7 +83,7 @@ export const SelectInputComp: React.FC<SelectInputCompProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {label && <Text style={tw`text-white py-2.5 capitalize ${labelClass ?? ""}`}>{label}</Text>}
+      {label && <TextWrapper style={tw`text-white  text-base py-2.5 capitalize ${labelClass ?? ""}`}>{label}</TextWrapper>}
       <SelectDropdown
         data={data}
         onSelect={(selectedItem, index) => {
@@ -93,16 +94,16 @@ export const SelectInputComp: React.FC<SelectInputCompProps> = ({
             {selectedItem && (
               <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
             )}
-            <Text style={styles.dropdownButtonTxtStyle}>
+            <TextWrapper style={styles.dropdownButtonTxtStyle}>
               {(selectedItem && selectedItem.title) || placeholder}
-            </Text>
+            </TextWrapper>
             <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} />
           </View>
         )}
         renderItem={(item, index, isSelected) => (
           <View style={[styles.dropdownItemStyle, isSelected && { backgroundColor: '#D2D9DF' }]}>
             <Icon name={item.icon} style={styles.dropdownItemIconStyle} />
-            <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
+            <TextWrapper style={styles.dropdownItemTxtStyle}>{item.title}</TextWrapper>
           </View>
         )}
         showsVerticalScrollIndicator={false}
