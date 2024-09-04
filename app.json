@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hasashi.bitflow"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -27,6 +28,14 @@
     "plugins": [
       "expo-router",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "29e0a716-9abe-4681-bab9-341f7895a986"
+      }
+    }
   }
 }
