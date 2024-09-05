@@ -1,30 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import tw from 'twrnc';
 import { useRouter } from 'expo-router';
 import { Button } from '../../../../components';
 import { OTPInputComp } from '../../../../components/OtpInputComp';
-
-// Sample data for country selection (not used in this screen but provided for completeness)
-const country = [
-  { title: 'Nigeria' },
-  { title: 'Ghana' },
-];
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 export default function OTPCodeVerificationScreen() {
   const router = useRouter();
   const [otpValue, setOtpValue] = useState<string>('');
+  const [email, setEmail] = useState<string | null>(null);
 
-  // Handler for verifying OTP
-  const handleVerify = () => {
-    // You might want to add OTP verification logic here
-    router.push('/homepage/');
+  useEffect(() => {
+    const getEmail = async () => {
+      try {
+        const storedUser = await AsyncStorage.getItem("user");
+        if (storedUser) {
+          const user = JSON.parse(storedUser);
+          setEmail(user.email); 
+        }
+      } catch (error) {
+        console.error("Error retrieving user from AsyncStorage:", error);
+      }
+    };
+  
+    getEmail();
+  }, []);
+  
+
+  const handleVerify = async () => {
+    if (!otpValue || otpValue.length !== 6) {
+      alert("Please enter a valid 6-digit OTP");
+      return;
+    }
+
+    const jsonData = JSON.stringify({
+      otp: otpValue,
+    });
+
+    try {
+      const response = await axios.post('https://bitflow-backend-server.vercel.app/api/auth/verify-otp', jsonData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status == 200) {
+        alert("Account Verified");
+        router.push('/auth/login');
+      } else if (response.status == 400) {
+        alert("Invalid or Expired OTP");
+      }
+    } catch (error: any) {
+      console.error(error.message);
+      alert("An error occurred during verification. Please try again.");
+    }
   };
 
   // Handler for resending OTP
-  const handleResendOtp = () => {
-    // Add logic to resend OTP
-    console.log('Resend OTP');
+  const handleResendOtp = async () => {
+    try {
+      // Add API call here to resend OTP
+      console.log('Resend OTP');
+      alert("OTP Resent to " + email);
+    } catch (error) {
+      console.error("Error resending OTP", error);
+      alert("Failed to resend OTP, please try again.");
+    }
   };
 
   return (
@@ -39,12 +82,12 @@ export default function OTPCodeVerificationScreen() {
 
         {/* OTP Instruction */}
         <Text style={tw`text-white text-center pt-8 pb-4`}>
-          Enter The OTP Sent To You +23480398357286
+          Enter The OTP Sent To {email ? email : 'your email'}
         </Text>
 
         {/* OTP Input */}
         <View style={tw`flex-col justify-center items-center py-20`}>
-          <OTPInputComp onChangeText={setOtpValue} digits={4} />
+          <OTPInputComp onChangeText={setOtpValue} digits={6} />
         </View>
 
         {/* Resend OTP Section */}

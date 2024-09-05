@@ -5,11 +5,12 @@ import tw from 'twrnc';
 import { Button, InputComp, PasswordInputComp, SelectInputComp } from '../../../components';
 import { useRouter } from 'expo-router';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const genderOptions = [
   { title: 'Select Gender', value: '' },
-  { title: 'man', value: 'man' },
-  { title: 'woman', value: 'woman' },
+  { title: 'male', value: 'male' },
+  { title: 'female', value: 'female' },
 ];
 
 export default function RegisterPage() {
@@ -18,6 +19,7 @@ export default function RegisterPage() {
   // State for the form fields
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [gender, setGender] = useState('');
@@ -36,6 +38,13 @@ export default function RegisterPage() {
       return;
     }
 
+    const userData = {
+      fullName, email, phoneNumber,gender
+    }
+
+    await AsyncStorage.setItem("user", JSON.stringify(userData));
+
+
     try {
   
       const jsonData = JSON.stringify({
@@ -43,6 +52,8 @@ export default function RegisterPage() {
         email,
         password,
         gender,
+        phoneNumber,
+        confirmPassword
       });
 
   
@@ -52,9 +63,10 @@ export default function RegisterPage() {
         },
       });
 
-      console.log(response);
-      if (response.data.success) {
-        router.push("/auth/otpVerification");
+      if (response.status == 201) {
+
+        alert(response.data.message)
+        router.push("/auth/otpVerification/otpCodeVerification");
       } else {
         alert(response.data.message || "Registration failed");
       }
@@ -86,6 +98,13 @@ export default function RegisterPage() {
             value={email}
             onChange={setEmail}
             keyboardType="email-address"
+          />
+          <InputComp
+            label='Phone Number'
+            placeholder='0819902029'
+            value={phoneNumber}
+            onChange={setPhoneNumber}
+            keyboardType="number-pad"
           />
           <PasswordInputComp
             label='Password'
