@@ -26,7 +26,7 @@ interface SelectInputCompProps extends InputCompProps {
 export const InputComp: React.FC<InputCompProps> = ({
   label,
   placeholder,
-  placeholderTextColor = "#C6C6C6",
+  placeholderTextColor = "#000000",
   keyboardType,
   inputClass = "",
   labelClass,
@@ -52,7 +52,7 @@ export const InputComp: React.FC<InputCompProps> = ({
 export const PasswordInputComp: React.FC<Omit<InputCompProps, 'keyboardType'>> = ({
   label,
   placeholder,
-  placeholderTextColor = "#C6C6C6",
+  placeholderTextColor = "#000000",
   inputClass = "",
   value,
   onChange,

@@ -1,5 +1,6 @@
 import { TextWrapper } from "./textWrapper";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { router } from "expo-router";
 import { View } from "react-native";
 import tw from 'twrnc';
 
@@ -32,7 +33,7 @@ export const Header = ({ title, home }: HeaderProps) => {
             )
         }
         {home ? (
-          <MaterialIcons name="notifications-active" color="white" size={24} />
+          <MaterialIcons name="notifications-active" color="white" size={24}  onPress={()=>router.push('/others/notifications')}/>
         ) : (
           <MaterialIcons name="ios-share" size={24} color="white" />
         )}

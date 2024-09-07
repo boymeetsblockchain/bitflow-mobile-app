@@ -2,13 +2,14 @@ import { TouchableOpacity, View } from "react-native";
 import { TextWrapper } from "../textWrapper";
 import tw from 'twrnc';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { router } from "expo-router";
 
 export const Wallet = () => {
   return (
     <View style={tw`w-full h-40 bg-[#E5770EB0] opacity-80 rounded-lg p-4`}>
       {/* QR Code Icon */}
       <TouchableOpacity>
-        <FontAwesome name="qrcode" size={28} color="white" />
+        <FontAwesome name="qrcode" size={28} color="white"  onPress={()=>router.push('/others/qr')}/>
       </TouchableOpacity>
 
       {/* Portfolio Balance */}

@@ -34,10 +34,10 @@ export const CryptoHeader = () => {
 
   return (
     <View style={tw`p-1.5 px-2 rounded-md  bg-transparent  flex-row items-center justify-between`}>
-      <TextWrapper style={tw`text-gray-700 text-sm`}>Bitcoin</TextWrapper>
+      <TextWrapper style={tw`text-white  text-sm`}>Bitcoin</TextWrapper>
       
       <View style={tw`flex-row items-center gap-x-2`}>
-        <TextWrapper style={tw`text-gray-700 text-sm`}>
+        <TextWrapper style={tw`text-gray-200  text-sm`}>
           ${cryptoData?.price?.toFixed(2)}
         </TextWrapper>
         <TextWrapper

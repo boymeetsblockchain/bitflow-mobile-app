@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, TextStyle, ViewStyle, StyleProp } from 'react-native';
+import { TextWrapper } from './textWrapper';
 import tw from 'twrnc';
 
 // Define props type for the Button component
@@ -21,9 +22,9 @@ const Button: React.FC<ButtonProps> = ({ title, titleClass, containerClass, onPr
       onPress={onPress}
       style={[buttonStyle, containerClass ? tw`${containerClass}` : {}]}
     >
-      <Text style={[textStyle, titleClass ? tw`${titleClass}` : {}]}>
+      <TextWrapper style={[textStyle, titleClass ? tw`${titleClass}` : {}]}>
         {title}
-      </Text>
+      </TextWrapper>
     </TouchableOpacity>
   );
 };

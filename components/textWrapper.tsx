@@ -29,3 +29,26 @@ export const TextWrapper = ({
         </Text>
     );
 };
+export const TextWrapperWhite = ({
+    children,
+    fontWeight = "regular", 
+    style,
+    ...props
+}: TextWrapperComponentProps) => {
+    const getFontFamily = () => {
+        switch (fontWeight) {
+            case "bold":
+                return "Poppins-Bold";
+            case "extraBold":
+                return "Poppins-ExtraBold";
+            default:
+                return "Poppins-Regular";
+        }
+    };
+
+    return (
+        <Text style={[{ fontFamily: getFontFamily() , color:"#fff"}, style]} {...props}>
+            {children}
+        </Text>
+    );
+};
