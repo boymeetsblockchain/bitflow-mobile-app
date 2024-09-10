@@ -21,14 +21,14 @@ export const HomePageFeatures = () => {
       </View>
         <View style={tw`flex-row justify-between my-2 items-center`}>
       <Pressable
-        onPress={() => router.push("/services/recharge")}
+        onPress={() => router.push("/services/buyandsell")}
         style={tw` items-center justify-center p-2 rounded-md`}
       >
         <Image source={require('../../assets/images/h1.png')} style={tw `h-12 w-12`}/>
         <TextWrapper style={tw`text-sm text-white`} fontWeight="bold">Buy & Sell</TextWrapper>
       </Pressable>
       <Pressable
-        onPress={() => router.push("/services/recharge")}
+        onPress={() => router.push("/services/sendandreceive")}
         style={tw` items-center justify-center p-2 rounded-md`}
       >
         <Image source={require('../../assets/images/h2.png')} style={tw `h-12 w-12`}/>
@@ -42,7 +42,7 @@ export const HomePageFeatures = () => {
         <TextWrapper style={tw`text-sm text-white`} fontWeight="bold">Pay Bills</TextWrapper>
       </Pressable>
       <Pressable
-        onPress={() => router.push("/services/recharge")}
+        onPress={() => router.push("/services/withdraw")}
         style={tw` items-center justify-center p-2 rounded-md`}
       >
         <Image source={require('../../assets/images/h4.png')} style={tw `h-12 w-12`}/>

@@ -15,7 +15,7 @@ export const Header = ({ title, home }: HeaderProps) => {
      
       <View style={tw`w-8`}>
         {home ? (
-          <MaterialIcons name="list" color="white" size={24} />
+          <MaterialIcons name="list" color="white" size={24} onPress={()=>router.push('/settings')} />
         ) : (
           <MaterialIcons name="chevron-left" color="white" size={24} />
         )}
@@ -35,7 +35,7 @@ export const Header = ({ title, home }: HeaderProps) => {
         {home ? (
           <MaterialIcons name="notifications-active" color="white" size={24}  onPress={()=>router.push('/others/notifications')}/>
         ) : (
-          <MaterialIcons name="ios-share" size={24} color="white" />
+          <View/>
         )}
       </View>
     </View>

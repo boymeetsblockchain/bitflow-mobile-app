@@ -64,7 +64,9 @@ export default function ProfilePage() {
         </View>
        <View>
         <TextWrapperWhite fontWeight='bold'>Support</TextWrapperWhite>
-        <Pressable style={tw `flex-row justify-between my-2 p-3 bg-[#8C6744] rounded-md`}>
+        <Pressable
+         onPress={()=>router.push('/others/customer')}
+        style={tw `flex-row justify-between my-2 p-3 bg-[#8C6744] rounded-md`}>
         <TextWrapperWhite>Customer Support</TextWrapperWhite>
         <Ionicons name="chevron-forward" size={20} color="white" />
         </Pressable>

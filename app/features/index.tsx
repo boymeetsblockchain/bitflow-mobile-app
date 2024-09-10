@@ -37,14 +37,14 @@ export default function index() {
     <View style={tw`flex-row justify-between my-2 items-center`}>
    
       <Pressable
-        onPress={() => router.push("/services/recharge")}
+        onPress={() => router.push("/services/swap")}
         style={tw` items-center justify-center p-2 rounded-md`}
       >
         <Image source={require('../../assets/images/h5.png')} style={tw `h-12 w-12`}/>
         <TextWrapperWhite style={tw`text-sm text-white`} fontWeight="bold">Swap</TextWrapperWhite>
       </Pressable>
      <Pressable
-        onPress={() => router.push("/services/recharge")}
+        onPress={() => router.push("/services/refer")}
         style={tw` items-center justify-center p-2 rounded-md`}
       >
         <Image source={require('../../assets/images/h6.png')} style={tw `h-12 w-12`}/>
