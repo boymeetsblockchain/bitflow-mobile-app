@@ -34,7 +34,7 @@ export default function BillPayment() {
           </TextWrapperWhite>
         </Pressable>
         <Pressable
-          onPress={() => router.push("/services/airtime")}
+          onPress={() => router.push("/services/education")}
           style={tw` items-center justify-center p-2 rounded-md`}
         >
           <Image

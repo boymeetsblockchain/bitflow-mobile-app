@@ -50,11 +50,11 @@ export const CryptoCard = () => {
             BTC
           </TextWrapper>
           <View style={tw`flex-col items-end`}>
-            <TextWrapper style={tw`text-white text-2xs`}>
+            <TextWrapper style={tw`text-white text-xs`}>
               ${cryptoData?.BTC?.price?.toFixed(2)}
             </TextWrapper>
             <TextWrapper
-              style={tw`text-2xs ${
+              style={tw`text-xs ${
                 cryptoData?.BTC?.percentageChange >= 0
                   ? "text-green-400"
                   : "text-red-400"
@@ -73,11 +73,11 @@ export const CryptoCard = () => {
             ETH
           </TextWrapper>
           <View style={tw`flex-col items-end`}>
-            <TextWrapper style={tw`text-white text-2xs`}>
+            <TextWrapper style={tw`text-white text-xs`}>
               ${cryptoData?.ETH?.price?.toFixed(2)}
             </TextWrapper>
             <TextWrapper
-              style={tw`text-2xs ${
+              style={tw`text-xs ${
                 cryptoData?.ETH?.percentageChange >= 0
                   ? "text-green-400"
                   : "text-red-400"
